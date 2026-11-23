@@ -8,10 +8,12 @@
         <h2>Main Menu</h2>
         <p>Welcome, {{ r }}</p>
 
-        <form action="/transfer_money" method="get">
+        <form action="/transferMoney" method="post">
             <input type="submit" value="Transfer Money">
         </form>
-
+        <form action="/storeMoney" method="post">
+            <input type="submit" value="Store Money">
+        </form>
         <form action="/" method="get">
             <input type="submit" value="Exit">
         </form>
