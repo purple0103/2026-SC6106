@@ -5,16 +5,16 @@
 
 <body>
     <div class="container">
-        <h2>Ethereum DApp</h2>
+        <h2>Transfer Money</h2>
 
         <input type="text" id="payer" placeholder="Enter payer address">
         <input type="text" id="payee" placeholder="Enter payee address">
-        <input type="number" id="amount" placeholder="Enter amount to transfer">
+		<input type="number" id="amount" placeholder="Enter amount">
 
         <button class="btn" onclick="transfer()">Transfer</button>
-        <button class="btn" onclick="transaction()">Transaction</button>
+        <button class="btn" onclick="transaction()">transaction</button>
 
-        <form action="/main" method="get">
+        <form action="/main" method="post">
             <input type="submit" value="Main">
         </form>
 
@@ -77,6 +77,7 @@ const web3 = new Web3(Web3.givenProvider);
 const contract = new web3.eth.Contract(contractABI, contractAddress);
 async function transfer() {
     const accounts = await web3.eth.requestAccounts();
+    console.log(accounts[0]);
 
     const payer = document.getElementById("payer").value;
     const payee = document.getElementById("payee").value;
@@ -87,11 +88,11 @@ async function transfer() {
     });
 }
 async function transaction() {
-    const result = await contract.methods.transaction().call();
+    const results = await contract.methods.transaction().call();
 
-    document.getElementById("view_payer").innerText = "Payer: " + result[0];
-    document.getElementById("view_payee").innerText = "Payee: " + result[1];
-    document.getElementById("view_amount").innerText = "Amount: " + result[2];
+    document.getElementById("view_payer").innerText = "Payer " + results[0];
+    document.getElementById("view_payee").innerText = "Payee " + results[1];
+    document.getElementById("view_amount").innerText = "Amount " + results[2];
 }
 </script>
 </body>
